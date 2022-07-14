@@ -24,11 +24,13 @@ def get_all_movies():
 def get_movie_by_id(id: int):
  return {"data": movies[id]}
 
-
 @app.post("/movie")
 def add_movie(id: int, name: str, rating:int, year:int):
  new_movie = {id: {"name": name, "rating": rating, "year": year}}
  movies.update(new_movie)
  return {"data": new_movie, "message": "Update successfully"}
 
-
+@app.put("/movie/{id}")
+def update_movie_by_id(id:int, name: str, rating: int, year: int):
+ movies[id] = {"name": name, "rating": rating, "year": year}
+ return {"message": "Movie updated", "data": f"movies[{id}]"}
